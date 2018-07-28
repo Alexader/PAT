@@ -47,3 +47,35 @@
       // 进行遍历操作
   }
   ```
+
+  写了好几道 STL的题目，发现自己对于 STL的用法还是不熟悉啊，好多坑等着踩。今天发现一个关于 `set` 的坑。代码如下：
+  ```c++
+  map<int, int> mp;
+  set<int> someSet;// 假设已经有值了
+  for (auto it = someSet.begin(); it != someSet.end(); it++) {
+		if (mp[*it] == 1)
+			someSet.erase(it);
+	}
+  ```
+  删除操作并不会向想的那样，it 迭代器指向的东西已经没了，那 it 应该指向哪里了呢，看了官方文档之后知道了。
+  ```c++
+  (1)iterator  erase (const_iterator position);
+  (2)size_type erase (const value_type& val);
+  (3)iterator  erase (const_iterator first, const_iterator last);
+  ```
+  `erase` 有三种模板，第二种返回的是删除的值，其他两种返回的是删除值下一个地方的迭代器（也就是顺延了一位）。
+  如果想要正确执行上面的代码，可以这样写：
+  ```c++
+  map<int, int> mp;
+  set<int> someSet;// 假设已经有值了
+  auto it = someSet.begin();
+  while(it != someSet.end()) {
+    auto now = it++;
+    if(mp[*now] == 1)
+      someSet.erase(now);
+  }
+  ```
+  因为标准库的设计思想是这样的：
+  > The insert members shall not affect the validity of iterators and references to the container, and the erase members shall invalidate only iterators and references to the erased elements.
+
+  
