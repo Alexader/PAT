@@ -78,4 +78,39 @@
   因为标准库的设计思想是这样的：
   > The insert members shall not affect the validity of iterators and references to the container, and the erase members shall invalidate only iterators and references to the erased elements.
 
-  
+* 2018-7-29
+
+  今天刷题太难受了，自己太蠢了，好多细节问题的处理都暴露出来了，对于字符串的处理，看了 KMP 感觉有点恐怖，越来越觉得 ACM 大佬太牛逼了，自己还是掌握基本的字符串的处理，这种高阶的算法 PAT怕是不会考，以后有机会再补上吧。
+
+  总结一下字符串处理里面经常用到的函数吧，除了一些脑子瓦特踩的坑，这些常用函数不熟悉踩的坑也很多。
+
+  ```c++
+  #include<string> // 基本的函数包含在这里面
+  bool isalpha(char a);
+  // 判断一个字符是否是英文字母。
+  bool isdigit(char a);
+  // 判断字符是否是数字
+
+  int stoi (const string&  str, size_t* idx = 0, int base = 10);
+  // 一般用不到那么多参数，数字进制一般就是 10，如果想要知道第一个不是数字的位置，可以传进去第二个参数。不过类型一定要用 std:string::size_type *sz，有点麻烦
+  std::string str_dec = "2001, A Space Odyssey";
+  std::string::size_type sz;   // alias of size_t
+  int i_dec = std::stoi (str_dec,&sz);
+  std::cout << "firrst non-digit position is  " << sz << '\n';
+  // output "firrst non-digit position is 4"
+
+  double stod(const string&  str, size_t* idx = 0);
+  float stof(const string&  str, size_t* idx = 0);
+  // 这两个用法都差不多，简单用法就是直接送一个 string 进取就行
+
+  string.push_back();
+  string.back();
+  // 可以很方便的像字符 vector 那样操作
+
+  int tolower ( int c );
+  int toupper ( int c );
+  // 标准的 c++ string 库好像没有提供直接的大小写转换函数，可以利用下面这个函数进行。需要配合 algorithm 中的 transform 函数进行。输出 "test pat"。转换大写，只要把 tolower() 改成 toupper。
+  #include <algorithm> 
+  string strA = "test PAT";
+  transform(strA.begin(), strA.end(),strA.begin(), ::tolower); 
+  ```
