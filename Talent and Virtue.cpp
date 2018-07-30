@@ -3,6 +3,9 @@
 #include<algorithm>
 #include <vector>
 using namespace std;
+// 看了大佬的写法，汗颜呐。在输入的时候直接分成四类人，保存在四个vector数组中
+// 这样比较函数的逻辑就不会这么复杂了，确实考场上复杂的逻辑容易出错，而且花的
+// 时间太多了,向大佬学习
 int n, lb, hb;
 struct people
 {
