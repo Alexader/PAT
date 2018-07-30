@@ -114,3 +114,14 @@
   string strA = "test PAT";
   transform(strA.begin(), strA.end(),strA.begin(), ::tolower); 
   ```
+  刷题到现在，感觉代码一定要用自己熟悉的函数和库，不然很容易出现 bug，而且一下子找不到，那就真的要哭了。平时多积累常用标准库的用法吧。
+  ```c++
+  // char 数组转化为 string 对象
+  char arr[] = "this is char array";
+  string str(arr);// 如果是还没有出现的string对象，可以直接使用构造函数
+  str.assign(arr); // 已经存在的string采用赋值函数。
+
+  string substr (size_t pos = 0, size_t len = npos) const; // 一般来说传入两个整型数据就可以了，一个起始下标，一个子串的长度。如果字串长度不写的话，就是后缀
+  ```
+
+  明天开始刷排序的题目，试了几道题目，这种题目一般来说不是很难，要不就是卡运行时间，要不就是 `cmp` 函数逻辑比较复杂，一般都可以用结构体解决，当然这里也要涉及基础的字符串的处理过程。
